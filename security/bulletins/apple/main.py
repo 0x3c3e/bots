@@ -30,7 +30,7 @@ async def main():
         traces_sample_rate=1.0,
     )
     path = pathlib.Path(os.environ["DATA_PATH"])
-    new_data = {update_id: name for update_id, name in get_security_updates()}
+    new_data = dict(get_security_updates())
     delta = new_data.keys() - path.read_text().splitlines()
     bot = telegram.Bot(os.environ["TOKEN_TELEGRAM"])
 
