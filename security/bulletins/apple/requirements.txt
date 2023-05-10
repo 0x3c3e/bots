@@ -1,0 +1,4 @@
+parsel==1.8.1
+requests==2.30.0
+sentry-sdk==1.22.2
+python-telegram-bot==20.3
