@@ -5,4 +5,4 @@ COPY main.py /app
 COPY requirements.txt /app
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["python", "/opt/main.py"]
+ENTRYPOINT ["python", "/app/main.py"]
