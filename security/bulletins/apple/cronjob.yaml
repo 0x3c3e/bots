@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: apple-security-updates-bot
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: apple-security-updates-bot
+            image: docker.io/0x3c3e/apple-security-updates-bot
+            volumeMounts:
+              - name: my-volume
+                mountPath: /data
+            env:
+              - name: TOKEN_SENTRY
+                valueFrom:
+                  secretKeyRef:
+                    name: apple-updates-bot-envs
+                    key: TOKEN_SENTRY
+              - name: TOKEN_TELEGRAM
+                valueFrom:
+                  secretKeyRef:
+                    name: apple-updates-bot-envs
+                    key: TOKEN_TELEGRAM
+              - name: CHAT_ID
+                valueFrom:
+                  secretKeyRef:
+                    name: apple-updates-bot-envs
+                    key: CHAT_ID
+              - name: DATA_PATH
+                valueFrom:
+                  secretKeyRef:
+                    name: apple-updates-bot-envs
+                    key: DATA_PATH
+          restartPolicy: Never
+          volumes: 
+            - name: my-volume
+              hostPath: 
+                path: /data
+          
