@@ -11,6 +11,10 @@ spec:
           containers:
           - name: apple-security-updates-bot
             image: docker.io/0x3c3e/apple-security-updates-bot
+            command:
+            - /bin/sh
+            - -c
+            - python /app/main.py
             volumeMounts:
               - name: my-volume
                 mountPath: /data
